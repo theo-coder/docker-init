@@ -1,5 +1,4 @@
 version: '3.3'
-
 services:
   php-fpm:
     build: ./
@@ -7,19 +6,7 @@ services:
       - 5000:8000
     volumes:
       - ../:/workspace
-  mysql:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test
-  phpmyadmin:
-    depends_on:
-      - mysql
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    ports:
-      - '8080:80'
-    environment:
-      PMA_HOST: mysql
+networks: 
+  default:
+    external: 
+      name: network
